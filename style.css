@@ -1,0 +1,100 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.img-box {
+  width: 400px;
+  height: 400px;
+  background-color: black;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.img-box input[type='checkbox'] {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+}
+
+span {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  pointer-events: none;
+  transform-style: preserve-3d;
+}
+
+span.img1 {
+  left: 0;
+  background: url(/img1.jpg);
+}
+
+span.img1::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(/img2.jpg);
+  transform-origin: right;
+  transition: 2s;
+  /*backface-visibility: hidden;*/
+}
+
+.img-box input[type='checkbox']:checked ~ span.img1::before {
+  transform: rotateY(180deg);
+}
+
+span.img2 {
+  right: 0;
+  background: url(/img2.jpg);
+  background-position-x: 200px;
+}
+
+span.img2::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: url(/img1.jpg);
+  background-position-x: 200px;
+  transform-origin: left;
+  transition: 2s;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+}
+
+.img-box input[type='checkbox']:checked ~ span.img2::before {
+  transform: rotateY(360deg);
+}
+
+.bg-color {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: 1s;
+  box-shadow: 0 25px 35px rgba(0, 0, 0, 0.1), 0 0 0 800px gray;
+  pointer-events: none;
+}
+
+.img-box input[type='checkbox']:checked ~ .bg-color {
+  box-shadow: 0 25px 35px rgba(0, 0, 0, 0.1), 0 0 0 800px rgb(31, 31, 31);
+}
